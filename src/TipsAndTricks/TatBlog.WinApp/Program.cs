@@ -17,7 +17,7 @@ namespace TatBlog.WinApp
 			// XuatDanhSachBaiViet(context);
 			// TimCacBaiVietDuocXemNhieuNhat(context, 3);
 			// XuatDanhSachDanhMuc(context);
-			// XuatDanhSachTheTheoPhanTrang(context);
+			XuatDanhSachTheTheoPhanTrang(context);
 
 			// Wait
 			Console.ReadKey();
