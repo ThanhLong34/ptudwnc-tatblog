@@ -27,9 +27,12 @@ namespace TatBlog.Services.Blogs
 		// Lấy danh sách chuyên mục và số lượng bài viết
 		// thuộc từng chuyên mục/chủ đề
 		public Task<IList<CategoryItem>> GetCategoriesAsync(bool showOnMenu = false, CancellationToken cancellationToken = default);
-	
+
 		// Lấy danh sách từ khóa/thẻ và phân trang theo
 		// các tham số pagingParams
 		public Task<IPagedList<TagItem>> GetPagedTagsAsync(IPagingParams pagingParams, CancellationToken cancellationToken = default);
+
+		// Lấy tag theo Slug
+		public Task<Tag> GetTagBySlugAsync(string slug, CancellationToken cancellationToken = default);
 	}
 }

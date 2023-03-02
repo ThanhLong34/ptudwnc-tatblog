@@ -1,4 +1,5 @@
-﻿using TatBlog.Data.Contexts;
+﻿using TatBlog.Core.Entities;
+using TatBlog.Data.Contexts;
 using TatBlog.Data.Seeders;
 using TatBlog.Services.Blogs;
 
@@ -17,8 +18,8 @@ namespace TatBlog.WinApp
 			// XuatDanhSachBaiViet(context);
 			// TimCacBaiVietDuocXemNhieuNhat(context, 3);
 			// XuatDanhSachDanhMuc(context);
-			XuatDanhSachTheTheoPhanTrang(context);
-
+			// XuatDanhSachTheTheoPhanTrang(context);
+			// TimTagTheoSlug(context, "tag-19");
 			// Wait
 			Console.ReadKey();
 		}
@@ -126,6 +127,21 @@ namespace TatBlog.WinApp
 			foreach (var tag in tagsList)
 			{
 				Console.WriteLine("{0,-5}{1,-50}{2,10}", tag.Id, tag.Name, tag.PostCount);
+			}
+		}
+
+		static async void TimTagTheoSlug(BlogDbContext context, string slug)
+		{
+			// Tạo đối tượng BlogRepository
+			IBlogRepository blogRepo = new BlogRepository(context);
+
+			// Lấy danh sách từ khóa
+			Tag tag = await blogRepo.GetTagBySlugAsync(slug);
+
+			// Xuất ra màn hình
+			Console.WriteLine("{0,-5}{1,-50}{2,10}", "ID", "Name", "Count");
+			if (tag != null) {
+				Console.WriteLine("{0,-5}{1,-50}{2,10}", tag.Id, tag.Name, tag.Posts.Count);
 			}
 		}
 	}
