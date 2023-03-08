@@ -140,7 +140,8 @@ namespace TatBlog.WinApp
 
 			// Xuất ra màn hình
 			Console.WriteLine("{0,-5}{1,-50}{2,10}", "ID", "Name", "Count");
-			if (tag != null) {
+			if (tag != null)
+			{
 				Console.WriteLine("{0,-5}{1,-50}{2,10}", tag.Id, tag.Name, tag.Posts.Count);
 			}
 		}
