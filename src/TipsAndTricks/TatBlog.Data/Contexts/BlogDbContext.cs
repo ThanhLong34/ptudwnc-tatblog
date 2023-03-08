@@ -16,6 +16,10 @@ namespace TatBlog.Data.Contexts
 		public DbSet<Post> Posts { get; set; } 
 		public DbSet<Tag> Tags { get; set; }
 
+		public BlogDbContext() { }
+
+		public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options) { }
+
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
 			// LAPTOP-QG81K6JN
