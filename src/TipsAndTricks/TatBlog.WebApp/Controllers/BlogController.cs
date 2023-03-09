@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TatBlog.Core.Contracts;
 using TatBlog.Core.DTO;
 using TatBlog.Services.Blogs;
 
@@ -14,9 +15,9 @@ namespace TatBlog.WebApp.Controllers
 		}
 
 		public async Task<IActionResult> Index(
-			[FromQuery(Name = "k")] string keywork = null,	
-			[FromQuery(Name = "p")] int pageNumber = 1,	
-			[FromQuery(Name = "ps")] int pageSize = 10	
+			[FromQuery(Name = "k")] string keywork = null,
+			[FromQuery(Name = "p")] int pageNumber = 1,
+			[FromQuery(Name = "ps")] int pageSize = 10
 		)
 		{
 			// Tao doi tuong chua cac dieu kien truy van
@@ -44,5 +45,5 @@ namespace TatBlog.WebApp.Controllers
 		public IActionResult About() => View();
 		public IActionResult Contact() => View();
 		public IActionResult Rss() => Content("Nội dung sẽ được cập nhật");
-	}
+    }
 }
