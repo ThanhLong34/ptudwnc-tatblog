@@ -13,6 +13,7 @@ namespace TatBlog.Core.DTO
         public bool PublishedOnly { get; set; }
         public string AuthorSlug { get; set; }
         public string CategorySlug { get; set; }
+        public string CategoryName { get; set; }
         public string TagSlug { get; set; }
         public string TitleSlug { get; set; }
         public string Keyword { get; set; }
