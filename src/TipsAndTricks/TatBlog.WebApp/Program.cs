@@ -16,6 +16,7 @@ namespace TatBlog.WebApp
             {
                 builder
                     .ConfigureMvc()
+                    .ConfigureNLog()
                     .ConfigureServices()
                     .ConfigureMapster()
                     .ConfigureFluentValidation();
