@@ -165,6 +165,15 @@
         "fonts/FontAwesome.otf",
         "README.md"
       ]
+    },
+    {
+      "library": "speakingurl@14.0.1",
+      "destination": "wwwroot/lib/speakingurl/",
+      "files": [
+        "speakingurl.min.js",
+        "README.md",
+        "LICENSE"
+      ]
     }
   ]
 }

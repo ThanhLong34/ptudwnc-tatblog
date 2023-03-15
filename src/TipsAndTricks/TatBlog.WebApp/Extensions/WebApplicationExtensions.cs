@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NLog.Web;
 using TatBlog.Data.Contexts;
 using TatBlog.Data.Seeders;
 using TatBlog.Services.Blogs;
+using TatBlog.Services.Media;
+using TatBlog.WebApp.Middlewares;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace TatBlog.WebApp.Extensions
@@ -20,10 +23,14 @@ namespace TatBlog.WebApp.Extensions
         public static WebApplicationBuilder ConfigureServices(this WebApplicationBuilder builder)
         {
             builder.Services.AddDbContext<BlogDbContext>(options =>
-            options.UseSqlServer(
-            builder.Configuration
-            .GetConnectionString("DefaultConnection")));
-            builder.Services.AddScoped<IBlogRepository, BlogRepository>(); builder.Services.AddScoped<IDataSeeder, DataSeeder>();
+                options.UseSqlServer(
+                    builder.Configuration
+                        .GetConnectionString("DefaultConnection")));
+
+            builder.Services.AddScoped<IMediaManager, LocalFileSystemMediaManager>();
+            builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+            builder.Services.AddScoped<IDataSeeder, DataSeeder>();
+
             return builder;
         }
 
@@ -58,6 +65,9 @@ namespace TatBlog.WebApp.Extensions
             // de xu ly mot HTTP request
             app.UseRouting();
 
+            // Them middleware de luu vet nguoi dung
+            app.UseMiddleware<UserActivityMiddleware>();
+
             return app;
         }
 
@@ -77,6 +87,14 @@ namespace TatBlog.WebApp.Extensions
             }
 
             return app;
+        }
+
+        public static WebApplicationBuilder ConfigureNLog(this WebApplicationBuilder builder)
+        {
+            builder.Logging.ClearProviders();
+            builder.Host.UseNLog();
+
+            return builder;
         }
     }
 }
