@@ -5,7 +5,7 @@ using TatBlog.WebApp.Areas.Admin.Models;
 
 namespace TatBlog.WebApp.Mapsters
 {
-    public class MapsterConfiguration
+    public class MapsterConfiguration : IRegister
     {
         public void Register(TypeAdapterConfig config)
         {
@@ -18,7 +18,7 @@ namespace TatBlog.WebApp.Mapsters
 
             config.NewConfig<PostEditModel, Post>()
                 .Ignore(dest => dest.Id)
-                .Ignore(dest => dest.ImageUrl);;
+                .Ignore(dest => dest.ImageUrl);
 
             config.NewConfig<Post, PostEditModel>()
                 .Map(dest => dest.SelectedTags, src => string.Join("\r\n", src.Tags.Select(x => x.Name)))
