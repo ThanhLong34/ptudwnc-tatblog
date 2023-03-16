@@ -15,7 +15,7 @@ namespace TatBlog.WebApp.Controllers
 		}
 
 		public async Task<IActionResult> Index(
-			[FromQuery(Name = "k")] string keywork = null,
+			[FromQuery(Name = "k")] string keyword = null,
 			[FromQuery(Name = "p")] int pageNumber = 1,
 			[FromQuery(Name = "ps")] int pageSize = 10
 		)
@@ -27,7 +27,7 @@ namespace TatBlog.WebApp.Controllers
 				PublishedOnly = true,
 
 				// Tim bai viet theo tu khoa
-				Keyword = keywork
+				Keyword = keyword
 			};
 
 			// Truy van cac bai viet theo dieu kien da tao

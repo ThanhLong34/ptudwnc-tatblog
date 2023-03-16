@@ -68,7 +68,7 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
             // id = 0 -> Them bai viet moi
             // id > 0 -> Doc du lieu cua bai viet tu CSDL
             var post = id > 0
-                ? await _blogRepository.GetPostByIdAsync(id) : null;
+                ? await _blogRepository.GetPostByIdAsync(id, true) : null;
 
             // Tao view model tu du lieu cua bai viet
             var model = post == null 
@@ -82,7 +82,9 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(IValidator<PostEditModel> postValidator, PostEditModel model)
+        public async Task<IActionResult> Edit(
+            [FromServices] IValidator<PostEditModel> postValidator,
+            PostEditModel model)
         {
             var validationResult = await postValidator.ValidateAsync(model);
 
@@ -98,7 +100,7 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
             }
 
             var post = model.Id > 0
-                ? await _blogRepository.GetPostByIdAsync(model.Id)
+                ? await _blogRepository.GetPostByIdAsync(model.Id, true)
                 : null;
 
             if (post == null)
@@ -111,7 +113,7 @@ namespace TatBlog.WebApp.Areas.Admin.Controllers
             else
             {
                 _mapper.Map(model, post);
-
+                await Console.Out.WriteLineAsync(model.ToString());
                 post.Category = null;
                 post.ModifiedDate = DateTime.Now;
             }
