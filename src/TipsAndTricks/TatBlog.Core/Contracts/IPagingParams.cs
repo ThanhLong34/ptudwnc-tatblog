@@ -8,9 +8,9 @@ namespace TatBlog.Core.Contracts
 {
 	public interface IPagingParams
 	{
-		public int PageSize { get; set; }
-		public int PageNumber { get; set; }
-		public string SortColumn { get; set; }
-		public string SortOrder { get; set; }
+		int PageSize { get; set; }
+		int PageNumber { get; set; }
+		string SortColumn { get; set; }
+		string SortOrder { get; set; }
 	}
 }
