@@ -42,9 +42,32 @@
                     <td>@post.Author.Fullname</td>
                     <td>@post.Category.Name</td>
                     <td>
-                        <button class="btn btn-primary text-white">
-                            @(post.Published ? "Có" : "Không")
-                        </button>
+                        <a asp-area="Admin"
+                           asp-controller="Posts"
+                           asp-action="ToggleStatus"
+                           asp-route-id="@post.Id"
+                           asp-route-p="@postList.PageNumber"
+                           asp-route-ps="@postList.PageSize"
+                           class="btn btn-info">
+                            @if (post.Published)
+                            {
+                                <span>Ẩn</span>
+                            }
+                            else
+                            {
+                                <span>Hiện</span>
+                            }
+                        </a>
+
+                        <a asp-area="Admin"
+                           asp-controller="Posts"
+                           asp-action="Delete"
+                           asp-route-id="@post.Id"
+                           asp-route-p="@postList.PageNumber"
+                           asp-route-ps="@postList.PageSize"
+                           class="btn btn-danger">
+                            Xóa
+                        </a>
                     </td>
                 </tr>
             }

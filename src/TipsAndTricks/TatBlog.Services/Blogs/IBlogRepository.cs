@@ -102,5 +102,9 @@ namespace TatBlog.Services.Blogs
 
         public Task<bool> IsPostSlugExistedAsync(
            int postId, string slug, CancellationToken cancellationToken = default);
+
+        public Task TogglePostPublishedStatusAsync(int id, CancellationToken cancellationToken = default);
+
+        public Task<bool> DeletePostByIdAsync(int id, CancellationToken cancellationToken = default);
     }
 }

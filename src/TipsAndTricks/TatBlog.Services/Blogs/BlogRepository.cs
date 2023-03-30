@@ -20,7 +20,7 @@ namespace TatBlog.Services.Blogs
         public BlogRepository(BlogDbContext context)
         {
             _context = context;
-        }        
+        }
 
         // Tìm Top N bài viết phổ được nhiều người xem nhất
         public async Task<IList<Post>> GetPopularArticlesAsync(
@@ -491,6 +491,33 @@ namespace TatBlog.Services.Blogs
             //	.WhereIf(condition.Year > 0, x => x.PostedDate.Year == condition.Year)
             //	.WhereIf(condition.Month > 0, x => x.PostedDate.Month == condition.Month)
             //	.WhereIf(!string.IsNullOrWhiteSpace(condition.TitleSlug), x => x.UrlSlug == condition.TitleSlug);
+        }
+
+        public async Task TogglePostPublishedStatusAsync(int id, CancellationToken cancellationToken = default)
+        {
+            await _context.Set<Post>()
+             .Where(p => p.Id == id)
+             .ExecuteUpdateAsync(
+                 p => p.SetProperty(p => p.Published, p => !p.Published),
+                 cancellationToken
+             );
+            ;
+        }
+
+        public async Task<bool> DeletePostByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            var postToDelete = await _context.Set<Post>()
+               .Include(p => p.Tags)
+               .Where(p => p.Id == id)
+               .FirstOrDefaultAsync(cancellationToken);
+            if (postToDelete == null)
+            {
+                return false;
+            }
+
+            _context.Set<Post>().Remove(postToDelete);
+            await _context.SaveChangesAsync(cancellationToken);
+            return true;
         }
     }
 }
