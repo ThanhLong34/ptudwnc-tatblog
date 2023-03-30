@@ -1,6 +1,7 @@
 using TatBlog.WebApi.Endpoints;
 using TatBlog.WebApi.Extensions;
 using TatBlog.WebApi.Mapsters;
+using TatBlog.WebApi.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -9,7 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
       .ConfigureNLog()
       .ConfigureServices()
       .ConfigureSwaggerOpenApi()
-      .ConfigureMapster();
+      .ConfigureMapster()
+      .ConfigureFluentValidation();
 }
 
 

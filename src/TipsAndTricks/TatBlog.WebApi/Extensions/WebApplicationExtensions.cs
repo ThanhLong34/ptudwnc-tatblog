@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using NLog.Web;
+using System.ComponentModel.DataAnnotations;
 using TatBlog.Data.Contexts;
 using TatBlog.Services.Blogs;
 using TatBlog.Services.Media;

@@ -154,4 +154,23 @@ public class AuthorRepository : IAuthorRepository
 				x.SetProperty(a => a.ImageUrl, a => imageUrl), 
 				cancellationToken) > 0;
 	}
+
+    public async Task<List<AuthorItem>> GetAuthorsHasMostPost(int numberOfAuthors, CancellationToken cancellationToken = default)
+    {
+        return await _context.Authors
+            .Include(post => post.Posts)
+            .Select(a => new AuthorItem()
+            {
+                Id = a.Id,
+                UrlSlug = a.UrlSlug,
+                ImageUrl = a.ImageUrl,
+                Email = a.Email,
+                Fullname = a.Fullname,
+                Notes = a.Notes,
+                PostCount = a.Posts.Count(p => p.Published)
+            })
+            .OrderByDescending(a => a.PostCount)
+            .Take(numberOfAuthors)
+            .ToListAsync(cancellationToken);
+    }
 }

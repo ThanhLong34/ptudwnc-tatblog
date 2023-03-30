@@ -46,4 +46,6 @@ public interface IAuthorRepository
 	Task<bool> SetImageUrlAsync(
 		int authorId, string imageUrl,
 		CancellationToken cancellationToken = default);
+
+	Task<List<AuthorItem>> GetAuthorsHasMostPost(int numberOfAuthors, CancellationToken cancellationToken = default);
 }
