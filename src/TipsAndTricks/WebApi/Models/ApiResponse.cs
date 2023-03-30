@@ -1,7 +1,7 @@
 ﻿using FluentValidation.Results;
 using System.Net;
 
-namespace WebApi.Models
+namespace TatBlog.WebApi.Models
 {
     public class ApiResponse
     {

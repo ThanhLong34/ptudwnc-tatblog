@@ -5,7 +5,7 @@ using TatBlog.Services.Blogs;
 using TatBlog.Services.Media;
 using TatBlog.Services.Timing;
 
-namespace WebApi.Extensions
+namespace TatBlog.WebApi.Extensions
 {
     public static class WebApplicationExtensions
     {

@@ -1,7 +1,7 @@
 ﻿using FluentValidation.Results;
-using WebApi.Models;
+using TatBlog.WebApi.Models;
 
-namespace WebApi.Extensions
+namespace TatBlog.WebApi.Extensions
 {
     public static class ValidationResultExtensions
     {
