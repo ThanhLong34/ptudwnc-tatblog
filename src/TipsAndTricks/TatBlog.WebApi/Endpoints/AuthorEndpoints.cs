@@ -22,46 +22,45 @@ namespace TatBlog.WebApi.Endpoints
 
             routeGroupBuilder.MapGet("/", GetAuthors)
                 .WithName("GetAuthors")
-                .Produces<PaginationResult<AuthorItem>>();
+                .Produces<ApiResponse<PaginationResult<AuthorItem>>>();
 
             routeGroupBuilder.MapGet("/{id:int}", GetAuthorDetails)
                 .WithName("GetAuthorById")
-                .Produces<AuthorItem>()
-                .Produces(404);
+                .Produces(404)
+                .Produces<ApiResponse<AuthorItem>>();
 
             routeGroupBuilder.MapGet("/{slug:regex(^[a-z0-9_-]+$)}/posts", GetPostsByAuthorSlug)
                 .WithName("GetPostsByAuthorSlug")
-                .Produces<PaginationResult<PostDto>>();
+                .Produces<ApiResponse<PaginationResult<PostDto>>>();
 
             routeGroupBuilder.MapPost("/", AddAuthor)
                 .WithName("AddNewAuthor")
                 .AddEndpointFilter<ValidatorFilter<AuthorEditModel>>()
-                .Produces(201)
-                .Produces(400)
-                .Produces(409);
+                .Produces(401)
+                .Produces<ApiResponse<AuthorItem>>();
 
             routeGroupBuilder.MapPost("/{id:int}/avatar", SetAuthorPicture)
                 .WithName("SetAuthorPicture")
                 .Accepts<IFormFile>("multipart/form-data")
                 .Produces<string>()
-                .Produces(400);
+                .Produces(401)
+                .Produces<ApiResponse<string>>();
 
             routeGroupBuilder.MapPut("/{id:int}", UpdateAuthor)
                 .WithName("UpdateAnAuthor")
                 .AddEndpointFilter<ValidatorFilter<AuthorEditModel>>()
-                .Produces(204)
-                .Produces(400)
-                .Produces(409);
+                .Produces(401)
+                .Produces<ApiResponse<string>>();
 
             routeGroupBuilder.MapDelete("/{id:int}", DeleteAuthor)
                 .WithName("DeleteAnAuthor")
-                .Produces(204)
-                .Produces(404);
+                .Produces(401)
+                .Produces<ApiResponse<string>>();
 
             routeGroupBuilder.MapGet("/best/{limit:int}", GetAuthorsHasMostPost)
                 .WithName("GetAuthorsHasMostPost")
-                .Produces<AuthorItem>()
-                .Produces(404);
+                .Produces(404)
+                .Produces<ApiResponse<AuthorItem>>();
 
             return app;
         }
