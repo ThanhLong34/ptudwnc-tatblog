@@ -65,6 +65,12 @@ namespace TatBlog.Services.Blogs
         public Task<IPagedList<TagItem>> GetPagedTagsAsync(
             IPagingParams pagingParams, CancellationToken cancellationToken = default);
 
+        Task<IPagedList<T>> GetPagedTagsAsync<T>(
+             TagQuery query,
+             IPagingParams pagingParams,
+             Func<IQueryable<Tag>, IQueryable<T>> mapper,
+             CancellationToken cancellationToken = default);
+
         public Task<bool> DeleteTagAsync(
             int tagId, CancellationToken cancellationToken = default);
 
@@ -106,5 +112,13 @@ namespace TatBlog.Services.Blogs
         public Task TogglePostPublishedStatusAsync(int id, CancellationToken cancellationToken = default);
 
         public Task<bool> DeletePostByIdAsync(int id, CancellationToken cancellationToken = default);
+
+        Task<IPagedList<T>> GetPagedPostsByQueryAsync<T>(
+            Func<IQueryable<Post>, IQueryable<T>> mapper, PostQuery query, IPagingParams pagingParams, CancellationToken cancellationToken = default);
+
+        Task<IList<Post>> GetRandomPostsAsync(int num, CancellationToken cancellationToken = default);
+
+        Task<Post> GetPostBySlugAsync(string slug, bool includeDetails = false, CancellationToken cancellationToken = default);
+        Task<bool> SetImageUrlPostAsync(int postId, string imageUrl, CancellationToken cancellationToken = default);
     }
 }
