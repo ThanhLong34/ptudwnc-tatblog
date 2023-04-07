@@ -19,12 +19,18 @@ const PostList = ({ postItem }) => {
 				</div>
 				<div className="col-md-8">
 					<Card.Body>
-						<Card.Title>{postItem.title}</Card.Title>
+						<Card.Title>
+							<Link to={`/post/${postedDate.getFullYear()}/${postedDate.getMonth() + 1}/${postedDate.getDate()}/${postItem.urlSlug}`}>{postItem.title}</Link>
+						</Card.Title>
 						<Card.Text>
 							<small className="text-muted">Tác giả:</small>
-							<span className="text-primary m-1">{postItem.author.fullName}</span>
+							<span className="text-primary m-1">
+								<Link to={`/author/${postItem.author.urlSlug}`}>{postItem.author.fullname}</Link>
+							</span>
 							<small className="text-muted">Chủ đề:</small>
-							<span className="text-primary m-1">{postItem.category.name}</span>
+							<span className="text-primary m-1">
+								<Link to={`/author/${postItem.category.urlSlug}`}>{postItem.category.name}</Link>
+							</span>
 						</Card.Text>
 						<Card.Text>{postItem.shortDescription}</Card.Text>
 						<div className="tag-list">

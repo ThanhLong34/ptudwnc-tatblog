@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getPosts } from "../services/blogRepository";
-import PostList from "../components/PostList";
+import PostItem from "../components/PostItem";
 import Pager from "../components/Pager";
 
 const Index = () => {
@@ -37,7 +37,7 @@ const Index = () => {
 		return (
 			<div className="p-4">
 				{postList.map((item, index) => {
-					return <PostList postItem={item} key={index} />;
+					return <PostItem postItem={item} key={index} />;
 				})}
 				<Pager postquery={{ keyword: k }} metadata={metadata} />
 			</div>
