@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
-import { isEmptyOrSpaces } from "../Utils/Utils";
+import { isEmptyOrSpaces } from "../Utils/utils";
 import TagList from "./TagList";
 
 const PostList = ({ postItem }) => {
 	let imageUrl = isEmptyOrSpaces(postItem.imageUrl)
-		? process.env.PUBLIC_URL + "/images/no-image.jpg"
+		? "/images/no-image.jpg"
 		: `${postItem.imageUrl}`;
 
 	let postedDate = new Date(postItem.postedDate);
@@ -15,7 +15,7 @@ const PostList = ({ postItem }) => {
 			<Card>
 				<div className="row g-0">
 					<div className="col-md-4"></div>
-					<Card.Img variant="top" src={imageUrl} alt={postItem.title} />
+					<Card.Img className="post-image" variant="top" src={imageUrl} alt={postItem.title} />
 				</div>
 				<div className="col-md-8">
 					<Card.Body>
