@@ -11,6 +11,8 @@ import RSS from "./pages/RSS";
 
 import AdminLayout from "./pages/admin/AdminLayout";
 import * as AdminIndex from './pages/admin/Index';
+import NotFound from "./pages/NotFound";
+import BadRequest from "./pages/BadRequest";
 
 function App() {
 	return (
@@ -26,8 +28,9 @@ function App() {
 				<Route path="/admin" element={<AdminLayout />}>
 					<Route path="/admin" element={<AdminIndex.default />} />
 				</Route>
+				<Route path='/400' element={<BadRequest />} />
+				<Route path='*' element={<NotFound />} />
 			</Routes>
-
 			<Footer />
 		</Router>
 	);
